@@ -1,14 +1,17 @@
 import streamlit as st
 from streamlit.components.v1 import html
+from code_editor import code_editor
+import extra_streamlit_components as stx
 
 from PIL import Image
 import base64
 import logging
 from decouple import config
+import os
+import signal
+
 from util import include_css, replace_values_in_index_html
 
-from code_editor import code_editor
-import extra_streamlit_components as stx
 
 
 PAGE_ICON = config('PAGE_ICON')
@@ -55,6 +58,11 @@ st.set_page_config(layout="wide", initial_sidebar_state="expanded",
                    )
 include_css(st, ["css/style_github_ribbon.css", "css/style_menu_logo.css", "css/style_logo.css", "css/style_tabs.css"])
 
+# if the dry run is enabled, we will stop the script
+if config('DRY_RUN', default=False, cast=bool):
+    logging.info("dry run enabled, will stop script, now")
+    os.kill(os.getpid(), signal.SIGTERM)
+
 @st.cache_data
 def get_explanation(sparql_query, model_name):
     # TODO: call the explanation generation service
@@ -67,7 +75,6 @@ def get_explanation(sparql_query, model_name):
     
     return explanations
     
-
 
 def update_width_slider():
     st.session_state.width_slider = st.session_state.width_input
@@ -91,10 +98,8 @@ with st.sidebar:
         
     default_model = st.selectbox("Select a model to generate the explanation", explanation_models, index=0)
 
-    theme = st.selectbox("Select a theme for the code editor", [
-                         "default", "light", "dark", "contrast"], index=0)
-    shortcuts = st.selectbox(
-        "shortcuts:", ["vscode", "emacs", "vim", "sublime"], index=0)
+    theme = st.selectbox("Select a theme for the code editor", ["default", "light", "dark", "contrast"], index=0)
+    shortcuts = st.selectbox("shortcuts:", ["vscode", "emacs", "vim", "sublime"], index=0)
 
     help = "Activate to focus on the editor. It will remove some white space and text from the UI."
     agree_on_showing_additional_information = not st.checkbox(
@@ -116,7 +121,7 @@ buttons = [{
     "alwaysOn": True,
     "showWithIcon": True,
     "commands": ["submit"],
-    "style": {"bottom": "0.44rem", "right": "0.4rem"}
+    "style": {"bottom": "0.44rem", "right": "0.4rem", "color": "white", "border-color": "#f63366", "border-width": "thin", "border-radius": "0.5rem", "border-style": "solid"}
 }]
 
 # introduce the tool
@@ -158,7 +163,7 @@ if response_dict["type"] == "submit":
     else:
         try:
             explanation = get_explanation(sparql_query, chosen_id)
-            st.subheader(explanation["subtitle"])
+            st.markdown("#### " + explanation["subtitle"])
             st.write(explanation["explanation"])
         except Exception as e:
             st.error(f"An error occurred: {e}")
