@@ -89,7 +89,7 @@ with st.sidebar:
         image_data = base64.b64encode(f.read()).decode("utf-8")
         st.sidebar.markdown(
             f"""
-            <div style="display:table;margin-top:-10%;margin-bottom:15%;text-align:center">
+            <div style="display:table;margin-top:-10%;margin-bottom:15%;margin-left:auto;margin-right:auto;text-align:center">
                 <a href="{GITHUB_REPO}" title="go to GitHub repository"><img src="data:image/png;base64,{image_data}" class="app_logo"></a>
             </div>
             """,
@@ -172,7 +172,7 @@ else:
 
 st.markdown("""
 ---
-Brought to you by the [<img style="height:3ex;border:0" src="https://avatars.githubusercontent.com/u/120292474?s=96&v=4"> WSE research group](https://wse-research.org/?utm_source=image-to-ascii-art&utm_medium=footer) at the [Leipzig University of Applied Sciences](https://www.htwk-leipzig.de/).
+Brought to you by the [<img style="height:3ex;border:0" src="https://avatars.githubusercontent.com/u/120292474?s=96&v=4"> WSE research group](https://wse-research.org/?utm_source=loris&utm_medium=footer) at the [Leipzig University of Applied Sciences](https://www.htwk-leipzig.de/).
 
 See our [GitHub team page](http://wse.technology/) for more projects and tools.
 """, unsafe_allow_html=True)
