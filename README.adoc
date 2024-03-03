@@ -1,0 +1,99 @@
+:toc:
+:toclevels: 5
+:toc-placement!:
+:source-highlighter: highlight.js
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+:github-repository: https://github.com/WSE-research/LLM-based-explanations-for-SPARQL-queries
+endif::[]
+
+++++
+<img align="right" role="right" height="128" src="https://github.com/WSE-research/TODO.png?raw=true"/>
+++++
+
+= Loris -- LLM-based-explanations-for-SPARQL-queries
+
+...
+
+This tool was implemented using the https://streamlit.io/[Streamlit] library.
+
+---
+
+toc::[]
+
+---
+
+++++
+<div style="text-align: center">
+<img align="center" style="max-width:1442px" title="Screenshot" src="https://github.com/WSE-research/TODO.png?raw=true"/><br>
+<sub><sup>Screenshot</sup></sub>
+
+</div>
+++++
+
+
+== Features
+
+...
+
+== Online Demo 
+
+The demo is available at https://wse-research.org/loris--LLM-based-explanations-for-SPARQL-queries. 
+
+== Building and Running the Application
+
+=== Running locally without Python
+
+==== Install dependencies
+
+===== Install Python dependencies
+
+[source, bash]
+----
+pip install -r requirements.txt
+----
+
+==== Run the Application
+
+[source, bash]
+----
+python -m streamlit run loris--llm-based-explanations-for-sparql-queries.py --server.port=8501
+----
+
+After that, you can access the application at http://localhost:8501.
+
+=== Docker
+
+The application is available at https://hub.docker.com/r/wseresearch/loris--LLM-based-explanations-for-SPARQL-queries[Dockerhub] for free use in your environment.
+
+==== Build Docker Image
+
+[source, bash]
+----
+docker build -t TODO:latest . 
+----
+
+
+==== Run Docker Image
+
+[source, bash]
+----
+docker run --rm -p 8501:8501 --name TODO TODO:latest
+----
+
+Now, you can access the application at http://localhost:8501.
+
+== Contribute
+
+We are happy to receive your contributions. 
+Please create a pull request or an {github-repository}/issues/new[issue].
+As this tool is published under the {github-repository}/blob/main/LICENSE[MIT license], feel free to {github-repository}/fork[fork] it and use it in your own projects.
+
+== Disclaimer
+
+This tool just temporarily stores the image data. 
+This tool is provided "as is" and without any warranty, express or implied.
