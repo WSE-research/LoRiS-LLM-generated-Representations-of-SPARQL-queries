@@ -46,7 +46,7 @@ The demo is available at https://wse-research.org/loris--LLM-based-explanations-
 
 == Building and Running the Application
 
-=== Running locally without Python
+=== Running locally with Python 3
 
 ==== Install dependencies
 
@@ -57,7 +57,11 @@ The demo is available at https://wse-research.org/loris--LLM-based-explanations-
 pip install -r requirements.txt
 ----
 
+Note: If you are using a virtual environment, make sure to activate it before running the command.
+
 ==== Run the Application
+
+Note: The application will only work with Python 3.8+.
 
 [source, bash]
 ----

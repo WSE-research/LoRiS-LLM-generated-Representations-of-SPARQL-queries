@@ -34,6 +34,16 @@ PAGE_TITLE = "LoriS -- LLM-based explanations for SPARQL queries"
 
 explanation_models = ["GPT-3", "GPT-4", "Mistral"]
 
+EN_STRING = "🇺🇸 en"
+DE_STRING = "🇩🇪 de" 
+RU_STRING = "🇷🇺 ru"
+explanation_languages = [EN_STRING, DE_STRING, RU_STRING]
+explanation_languages_keys = {
+    EN_STRING: "en",
+    DE_STRING: "de",
+    RU_STRING: "ru"
+}
+
 example_code = """SELECT * 
 WHERE { 
     ?s ?p ?o . 
@@ -112,8 +122,18 @@ with st.sidebar:
             """,
             unsafe_allow_html=True,
         )
+
+    st.subheader("💬 Verbalization options")
         
-    default_model = st.selectbox("Select a model to generate the explanation", explanation_models, index=0)
+    default_model = st.selectbox("Select the model to generate the explanation by default", explanation_models, index=0)
+    
+    
+    default_language_string = st.selectbox("Select a language to generate the explanation", explanation_languages, index=0)
+    default_language = explanation_languages_keys[default_language_string]
+    
+    st.markdown("""---""")
+    
+    st.subheader("🖵 Visualization options")
 
     theme = st.selectbox("Select a theme for the code editor", ["default", "light", "dark", "contrast"], index=0)
     shortcuts = st.selectbox("shortcuts:", ["vscode", "emacs", "vim", "sublime"], index=0)
