@@ -78,7 +78,7 @@ The application is available at https://hub.docker.com/r/wseresearch/loris--LLM-
 
 [source, bash]
 ----
-docker build -t TODO:latest . 
+docker build -t loris:latest . 
 ----
 
 
@@ -86,7 +86,7 @@ docker build -t TODO:latest .
 
 [source, bash]
 ----
-docker run --rm -p 8501:8501 --name TODO TODO:latest
+docker run --rm -p 8501:8501 --name loris loris:latest
 ----
 
 Now, you can access the application at http://localhost:8501.

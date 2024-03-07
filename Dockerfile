@@ -28,7 +28,7 @@ ENV COLORTERM=24bit
 ENV UPLOAD_DIRECTORY=/app/working_directory
 
 # do a dry run to see if the applications would starts (so, we are not surprised if it doesn't work during the real start of the container)
-RUN (export DRY_RUN=True; export BACKEND_URL="none"; streamlit run loris--llm-based-explanations-for-sparql-queries.py &) && sleep 5 && curl http://localhost:${SERVER_PORT}/
+RUN (export DRY_RUN=True; export BACKEND_URL=$BACKEND_URL; streamlit run loris--llm-based-explanations-for-sparql-queries.py &) && sleep 5 && curl http://localhost:${SERVER_PORT}/
 
 EXPOSE $SERVER_PORT
 HEALTHCHECK CMD curl --fail http://localhost:$SERVER_PORT/_stcore/health

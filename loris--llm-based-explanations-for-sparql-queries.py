@@ -23,11 +23,9 @@ DESCRIPTION = config('DESCRIPTION').replace("\\n", "\n") % (
     GITHUB_REPO, GITHUB_REPO + "/issues/new", GITHUB_REPO + "/issues/new")
 META_DESCRIPTION = config('META_DESCRIPTION', default=None)
 
-REPLACE_INDEX_HTML_CONTENT = config(
-    'REPLACE_INDEX_HTML_CONTENT', default=False, cast=bool)
+REPLACE_INDEX_HTML_CONTENT = config('REPLACE_INDEX_HTML_CONTENT', default=False, cast=bool)
 CANONICAL_URL = config('CANONICAL_URL', default=None)
-ADDITIONAL_HTML_HEAD_CONTENT = config(
-    'ADDITIONAL_HTML_HEAD_CONTENT', default=None)
+ADDITIONAL_HTML_HEAD_CONTENT = config('ADDITIONAL_HTML_HEAD_CONTENT', default=None)
 WRAP = True
 
 PAGE_TITLE = "LoriS -- LLM-based explanations for SPARQL queries"
