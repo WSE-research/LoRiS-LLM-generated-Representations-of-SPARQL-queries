@@ -28,7 +28,7 @@ CANONICAL_URL = config('CANONICAL_URL', default=None)
 ADDITIONAL_HTML_HEAD_CONTENT = config('ADDITIONAL_HTML_HEAD_CONTENT', default=None)
 WRAP = True
 
-PAGE_TITLE = "LoRiS -- LLM-based natural-language representations for SPARQL queries over Wikidata"
+PAGE_TITLE = "LoRiS -- LLM-based natural-language representations for SPARQL queries over Wikidata and DBpedia"
 
 GPT3_5_TURBO = "GPT-3.5 (from OpenAI)"
 GPT4 = "GPT-4 (from OpenAI)"
