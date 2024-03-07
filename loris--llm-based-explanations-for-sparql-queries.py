@@ -30,17 +30,81 @@ WRAP = True
 
 PAGE_TITLE = "LoriS -- LLM-based explanations for SPARQL queries"
 
-explanation_models = ["GPT-3", "GPT-4", "Mistral"]
+GPT3_5_TURBO = "GPT-3.5-turbo (from OpenAI)"
+GPT4 = "GPT-4 (from OpenAI)"
+MISTRAL = "Mistral 7B (from Mistral AI)"
+MISTRAL_FINETUNED = "Mistral 7B, fine-tuned"
+ONESHOT = "One-shot"
+ZEROSHOT = "Zero-shot"
+
+
+MODEL_KEY = "model"
+LANGUAGE_KEY = "lang"
+SHOTS_KEY = "shots"
+
+GPT3_5_MODEL = "gpt-3.5-turbo"
+GPT4_MODEL = "gpt-4-1106-preview"
+MISTRAL_MODEL = "mistral-7b"
+MISTRAL_MODEL_FINETUNED = "mistral-7b-finetuned"
+
+SEPARATOR = """, 
+
+"""
+GPT3_5_ZERO_SHOT = GPT3_5_TURBO + SEPARATOR + ZEROSHOT
+GPT3_5_ONE_SHOT = GPT3_5_TURBO + SEPARATOR + ONESHOT
+GPT4_ZERO_SHOT = GPT4 + SEPARATOR + ZEROSHOT
+GPT4_ONE_SHOT = GPT4 + SEPARATOR + ONESHOT
+MISTRAL_ZERO_SHOT = MISTRAL + SEPARATOR + ZEROSHOT
+MISTRAL_ONE_SHOT = MISTRAL + SEPARATOR + ONESHOT
+MISTRAL_MODEL_FINETUNED_ZERO_SHOT = MISTRAL_FINETUNED + SEPARATOR + ZEROSHOT  
+MISTRAL_MODEL_FINETUNED_ONE_SHOT = MISTRAL_FINETUNED + SEPARATOR + ONESHOT   
+
+explanation_models_dict = { 
+    GPT3_5_ZERO_SHOT: {
+        MODEL_KEY: GPT3_5_MODEL,
+        SHOTS_KEY: 0
+        },
+    GPT3_5_ONE_SHOT: {
+        MODEL_KEY: GPT3_5_MODEL,
+        SHOTS_KEY: 1
+        },
+    GPT4_ZERO_SHOT: {
+        MODEL_KEY: GPT4_MODEL,
+        SHOTS_KEY: 0
+        },
+    GPT4_ONE_SHOT: {
+        MODEL_KEY: GPT4_MODEL,
+        SHOTS_KEY: 1
+        },
+    MISTRAL_ZERO_SHOT: {
+        MODEL_KEY: MISTRAL_ZERO_SHOT,
+        SHOTS_KEY: 0
+        },
+    MISTRAL_ONE_SHOT: {
+        MODEL_KEY: MISTRAL_ONE_SHOT,
+        SHOTS_KEY: 1
+        },
+    MISTRAL_MODEL_FINETUNED_ZERO_SHOT: {
+        MODEL_KEY: MISTRAL_MODEL_FINETUNED,
+        SHOTS_KEY: 0
+    },
+    MISTRAL_MODEL_FINETUNED_ONE_SHOT: {
+        MODEL_KEY: MISTRAL_MODEL_FINETUNED,
+        SHOTS_KEY: 1
+    }
+}
+explanation_models = explanation_models_dict.keys()
+
 
 EN_STRING = "🇺🇸 en"
 DE_STRING = "🇩🇪 de" 
 RU_STRING = "🇷🇺 ru"
-explanation_languages = [EN_STRING, DE_STRING, RU_STRING]
-explanation_languages_keys = {
+explanation_languages_dict = {
     EN_STRING: "en",
     DE_STRING: "de",
     RU_STRING: "ru"
 }
+explanation_languages = explanation_languages_dict.keys()
 
 example_code = """SELECT * 
 WHERE { 
@@ -74,9 +138,12 @@ if config('DRY_RUN', default=False, cast=bool):
     os.kill(os.getpid(), signal.SIGTERM)
 
 @st.cache_data
-def get_explanation(sparql_query, model_name):
+def get_explanation(sparql_query, model, lang):
+    model_name = model[MODEL_KEY]
+    shots = model[SHOTS_KEY]
+    
     query = urllib.parse.quote(sparql_query)
-    custom_url = f"{BACKEND_URL}/explanation?query_text={query}&language=en&shots=0&model={model_name}"
+    custom_url = f"{BACKEND_URL}/explanation?query_text={query}&language={lang}&shots={shots}&model={model_name}"
     logging.info(f"Generating explanation for '{sparql_query}' using {model_name} via {custom_url}")
     
     response = requests.get(custom_url)
@@ -123,11 +190,12 @@ with st.sidebar:
 
     st.subheader("💬 Verbalization options")
         
-    default_model = st.selectbox("Select the model to generate the explanation by default", explanation_models, index=0)
+    default_model = st.radio("Select the model to generate the explanation by default", explanation_models, index=0)
+    selected_model = explanation_models_dict[default_model]
     
     
     default_language_string = st.selectbox("Select a language to generate the explanation", explanation_languages, index=0)
-    default_language = explanation_languages_keys[default_language_string]
+    language = explanation_languages_dict[default_language_string]
     
     st.markdown("""---""")
     
@@ -191,28 +259,30 @@ for i, model in enumerate(explanation_models):
 
 st.subheader("Explanation for the given SPARQL query")
 if response_dict["type"] == "submit":
-    chosen_id = stx.tab_bar(data=tab_data, key="tab_bar", default=default_model)
-    logging.info("chosen_id: " + chosen_id)
-    if chosen_id == None or chosen_id == "None":
-        st.warning("Please select a model to generate the explanation.")
-    else:
-        explanation = get_explanation(sparql_query, chosen_id)
-        try:
-            subtitle = explanation["subtitle"]
-            explanation_text = explanation["explanation"]
-            ok = explanation["ok"]
-        except Exception as e:
-            if "explanation" in explanation:
-                explanation_text = explanation["explanation"] + f" (error: {str(e)})"
-            else:
-                explanation_text = "An error occurred: " + str(e)
-            ok = False
-
-        if ok:
-            st.markdown("#### " + subtitle)
-            st.write(explanation_text)
+    # chosen_id = stx.tab_bar(data=tab_data, key="tab_bar", default=default_model)
+    # logging.info("chosen_id: " + chosen_id)
+    # if chosen_id == None or chosen_id == "None":
+    #    st.warning("Please select a model to generate the explanation.")
+    # else:
+    logging.debug(selected_model)
+    
+    explanation = get_explanation(sparql_query, selected_model, language)
+    try:
+        subtitle = explanation["subtitle"]
+        explanation_text = explanation["explanation"]
+        ok = explanation["ok"]
+    except Exception as e:
+        if "explanation" in explanation:
+            explanation_text = explanation["explanation"] + f" (error: {str(e)})"
         else:
-            st.error("An error occurred: " + explanation_text)
+            explanation_text = "An error occurred: " + str(e)
+        ok = False
+
+    if ok:
+        st.markdown("#### " + subtitle)
+        st.write(explanation_text)
+    else:
+        st.error("An error occurred: " + explanation_text)
             
 else:
     st.warning("Please click on the 'explain me' button to generate the explanation.")
