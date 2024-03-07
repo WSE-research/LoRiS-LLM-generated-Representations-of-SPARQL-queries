@@ -1,10 +1,11 @@
 {
-    "services": [
-        {
-            "mode": "dockerfile",
-            "port": "40145:8501",
-            "image": "wseresearch/loris-llm-based-explanations-for-sparql-queries",
-            "tag": "latest"
+    "services": [{
+        "mode": "dockerfile",
+        "port": "40145:8501",
+        "image": "wseresearch/loris-llm-based-explanations-for-sparql-queries",
+        "tag": "latest",
+        "files": {
+            ".env": "env"
         }
-    ]
+    }]
 }
