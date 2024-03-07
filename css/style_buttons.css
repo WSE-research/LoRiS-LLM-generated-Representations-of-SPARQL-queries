@@ -1,0 +1,25 @@
+button[kind="primary"] {
+    background-color: #33FF33;
+    border-color: #339933;
+    color: #000000;
+}
+
+button[kind="primary"]:hover {
+    background-color: #66FF66;
+    border-color: #336633;
+    color: #000000;
+    box-shadow: 0px 0px 1ex 0.5ex #CDC;    
+}
+
+button[kind="secondary"] {
+    background-color: #FF3333;
+    border-color: #993333;
+    color: #000000;
+}
+
+button[kind="secondary"]:hover {
+    background-color: #FF6666;
+    border-color: #663333;
+    color: #000000;
+    box-shadow: 0px 0px 1ex 0.5ex #DCC;    
+}
