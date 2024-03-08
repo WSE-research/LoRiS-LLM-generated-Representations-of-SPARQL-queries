@@ -45,7 +45,7 @@ toc::[]
 
 == Online Demo 
 
-The online demo is available at https://wse-research.org/LoRiS--LLM-generated-representations-of-SPARQL-queries (or shorter at https://wse-research.org/LoRiS).
+The online demo is available at https://wse-research.org/LoRiS-LLM-generated-representations-of-SPARQL-queries (or shorter at https://wse-research.org/LoRiS).
 
 == Building and Running the Application
 
