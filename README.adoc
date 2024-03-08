@@ -8,18 +8,26 @@ ifdef::env-github[]
 :important-caption: :heavy_exclamation_mark:
 :caution-caption: :fire:
 :warning-caption: :warning:
-:github-repository: https://github.com/WSE-research/LLM-based-explanations-for-SPARQL-queries
+:github-repository: https://github.com/WSE-research/LoRiS--LLM-generated-Representations-of-SPARQL-queries
 endif::[]
 
 ++++
-<img align="right" role="right" height="128" src="https://github.com/WSE-research/TODO.png?raw=true"/>
+<img align="right" role="right" height="128" src="https://github.com/WSE-research/LLM-based-explanations-for-SPARQL-queries/blob/main/images/loris.png?raw=true"/>
 ++++
 
-= Loris -- LLM-based-explanations-for-SPARQL-queries
+= LoRiS -- LLM-generated natural-language representations of SPARQL queries over Wikidata and DBpedia
 
-...
+Linked Data technologies are used in many applications. 
+Despite the ease of the triple form, learning the standard query language SPARQL and understanding SPARQL queries might become cumbersome.
+For example, if IRIs of the knowledge graph are formed using numeric IDs (e.g., Wikidata) a human might need additional effort to understand the semantics of a SPARQL query.
+In addition, the sheer number of properties and classes modeled in a knowledge graph can overwhelm developers and end users.
+Hence, converting SPARQL to a native tongue might develop a deeper query structure understanding and mitigate possible mistakes made by developers.
 
-This tool was implemented using the https://streamlit.io/[Streamlit] library.
+We present here LoRiS, a demo application that generates natural language representations of SPARQL queries for the DBpedia and Wikidata Knowledge Graphs.
+For the generation, the demo supports 3 Large Language Models that can be used with 2 prompt types.
+The demo provides the option of generating natural-language text in 3 languages.
+
+This tool was implemented in Python 3 using the https://streamlit.io/[Streamlit] library.
 
 ---
 
@@ -29,24 +37,19 @@ toc::[]
 
 ++++
 <div style="text-align: center">
-<img align="center" style="max-width:1442px" title="Screenshot" src="https://github.com/WSE-research/TODO.png?raw=true"/><br>
+<img align="center" style="max-width:1442px" title="Screenshot" src="https://github.com/WSE-research/LLM-based-explanations-for-SPARQL-queries/blob/main/images/screenshot.png?raw=true"/><br>
 <sub><sup>Screenshot</sup></sub>
 
 </div>
 ++++
 
-
-== Features
-
-...
-
 == Online Demo 
 
-The demo is available at https://wse-research.org/loris--LLM-based-explanations-for-SPARQL-queries. 
+The online demo is available at https://wse-research.org/LoRiS--LLM-generated-representations-of-SPARQL-queries (or shorter at https://wse-research.org/LoRiS).
 
 == Building and Running the Application
 
-=== Running locally with Python 3
+=== Running locally with Python 3.8+
 
 ==== Install dependencies
 
@@ -60,8 +63,6 @@ pip install -r requirements.txt
 Note: If you are using a virtual environment, make sure to activate it before running the command.
 
 ==== Run the Application
-
-Note: The application will only work with Python 3.8+.
 
 [source, bash]
 ----
