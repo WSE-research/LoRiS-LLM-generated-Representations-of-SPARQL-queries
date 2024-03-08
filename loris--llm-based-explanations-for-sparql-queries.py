@@ -74,14 +74,14 @@ explanation_models_dict = {
         MODEL_KEY: GPT4_MODEL,
         SHOTS_KEY: 1
         },
-    MISTRAL_ZERO_SHOT: {
-        MODEL_KEY: MISTRAL_ZERO_SHOT,
-        SHOTS_KEY: 0
-        },
-    MISTRAL_ONE_SHOT: {
-        MODEL_KEY: MISTRAL_ONE_SHOT,
-        SHOTS_KEY: 1
-        },
+    # MISTRAL_ZERO_SHOT: {
+    #     MODEL_KEY: MISTRAL_ZERO_SHOT,
+    #     SHOTS_KEY: 0
+    #     },
+    # MISTRAL_ONE_SHOT: {
+    #     MODEL_KEY: MISTRAL_ONE_SHOT,
+    #     SHOTS_KEY: 1
+    #     },
     MISTRAL_MODEL_FINETUNED_ZERO_SHOT: {
         MODEL_KEY: MISTRAL_MODEL_FINETUNED,
         SHOTS_KEY: 0
