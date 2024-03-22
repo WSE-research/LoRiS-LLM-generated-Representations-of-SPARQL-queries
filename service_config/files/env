@@ -1,8 +1,10 @@
 PAGE_ICON=images/loris-small.png
 PAGE_IMAGE=images/loris.png
 GITHUB_REPO=https://github.com/WSE-research/LLM-based-explanations-for-SPARQL-queries
-DESCRIPTION=LoRiS translates your SPARQL query over the Wikidata and DBpedia knowledge graphs into a natural-language representation using multiple LLMs (Large Language Models), s.t., it becomes easier to understand [SPARQL queries](https://www.w3.org/TR/rdf-sparql-query/). For configuration, please see the sidebar. For more details, see our [GitHub repository](%s) where you can also [submit bug reports](%s) and [feature requests](%s).
-META_DESCRIPTION=LoRiS -- LLM-based natural-language representations for SPARQL queries -- translates your SPARQL query over Wikidata or DBpedia using multiple LLMs, s.t., it becomes easier to understand SPARQL queries.
+DESCRIPTION='LoRiS translates your SPARQL query over the Wikidata and DBpedia knowledge graphs into a natural-language representation using multiple LLMs (Large Language Models), s.t., it becomes easier to understand [SPARQL queries](https://www.w3.org/TR/rdf-sparql-query/). For configuration, please see the sidebar. For more details, see our [GitHub repository](%s) where you can also [submit bug reports](%s) and [feature requests](%s).'
+META_DESCRIPTION='LoRiS -- LLM-based natural-language representations for SPARQL queries -- translates your SPARQL query over Wikidata or DBpedia using multiple LLMs, s.t., it becomes easier to understand SPARQL queries.'
 REPLACE_INDEX_HTML_CONTENT=True
 CANONICAL_URL=https://wse-research.org/LoriS--LLM-based-explanations-for-SPARQL-queries
 BACKEND_URL=http://141.57.8.18:8099
+CUSTOM_HEADER=CUSTOM_HEADER_LORIS
+FEEDBACK_ENDPOINT=https://wse-research.org/api/sparql2nl-feedback

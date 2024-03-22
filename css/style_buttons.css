@@ -1,25 +1,43 @@
-button[kind="primary"] {
+#root>div:nth-child(1)>div>div>div>div>section.main>div.block-container>div>div>div>div>div>div>div>div>div>div>button {
+    background-color: #EEE;
+    border-color: #333399;
+    color: #000000;
+}
+
+.main div[data-testid="stHorizontalBlock"] button[kind="primary"] {
     background-color: #33FF33;
     border-color: #339933;
     color: #000000;
 }
 
-button[kind="primary"]:hover {
+.main div[data-testid="stHorizontalBlock"] button[kind="primary"]:hover {
     background-color: #66FF66;
     border-color: #336633;
     color: #000000;
-    box-shadow: 0px 0px 1ex 0.5ex #CDC;    
+    box-shadow: 0px 0px 1ex 0.5ex #CDC;
 }
 
-button[kind="secondary"] {
+.main div[data-testid="stHorizontalBlock"] button[kind="secondary"] {
     background-color: #FF3333;
     border-color: #993333;
     color: #000000;
 }
 
-button[kind="secondary"]:hover {
+.main div[data-testid="stHorizontalBlock"] button[kind="secondary"]:hover {
     background-color: #FF6666;
     border-color: #663333;
     color: #000000;
-    box-shadow: 0px 0px 1ex 0.5ex #DCC;    
+    box-shadow: 0px 0px 1ex 0.5ex #DCC;
+}
+
+div[data-testid="stNotificationContentSuccess"] p {
+    font-size: 120% !important;
+}
+
+a.random_example {
+    padding-top: 2ex !important;
+    display: block;
+    float: right;
+    text-decoration-style: dotted;
+    text-decoration-skip-ink: auto;
 }
