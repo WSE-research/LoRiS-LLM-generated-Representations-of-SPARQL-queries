@@ -10,11 +10,11 @@ jobs:
 
     steps:
       # required to access configuration
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # init registration 
       - name: Init Registration
-        uses: MindMaster98/docker-service-updater@v0.1.5
+        uses: MindMaster98/docker-service-updater@v0.2.1
         with:
           mode: register
           updater_host: ${{ secrets.UPDATER_HOST }}

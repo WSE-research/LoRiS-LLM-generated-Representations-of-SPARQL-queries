@@ -295,15 +295,17 @@ def send_feedback(feedback_endpoint, sparql_query, model, language, textual_repr
     if feedback_endpoint is None:
         logging.warning(f"No feedback endpoint is provided: {feedback_endpoint}.")
         return
-
-    response = requests.post(feedback_endpoint, json={
-        "sparql_query": sparql_query,
-        "model": model,
-        "language": language,
-        "textual_representation": textual_representation,
-        "feedback": feedback
-    })
-    logging.info("Feedback sent: " + str(response.status_code))
+    try:
+        response = requests.post(feedback_endpoint, json={
+            "sparql_query": sparql_query,
+            "model": model,
+            "language": language,
+            "textual_representation": textual_representation,
+            "feedback": feedback
+        })
+        logging.info("Feedback sent: " + str(response.status_code))
+    except Exception as e:
+        logging.error("Feedback was not sent: " + str(e))
 
 st.subheader(f"Natural-language representation ({language}) for the given SPARQL query")
 if response_dict["type"] == "submit":
