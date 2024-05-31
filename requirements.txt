@@ -3,5 +3,5 @@ Pillow==10.2.0
 python-decouple==3.8
 Requests==2.31.0
 streamlit==1.31.1
-streamlit_code_editor==0.1.0
+streamlit_code_editor==0.1.20
 extra_streamlit_components==0.1.71

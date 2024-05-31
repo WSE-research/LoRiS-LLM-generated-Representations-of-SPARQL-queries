@@ -6,6 +6,7 @@ import re
 import base64
 from io import BytesIO
 import markdown
+import random
 
 def include_css(st, filenames):
     content = ""
@@ -87,6 +88,8 @@ def replace_values_in_index_html(st, activate, new_title, new_meta_description=N
     index_html = os.path.dirname(st.__file__) + '/static/index.html'
     index_html_backup = index_html + ".backup"
     index_html_change_indicator_file = index_html + ".changed"
+    
+    logging.warning("The index.html file is located at " + index_html + ".")
 
     # stop if index.html has already been changed
     if os.path.exists(index_html_change_indicator_file):
@@ -133,3 +136,72 @@ def replace_values_in_index_html(st, activate, new_title, new_meta_description=N
 
     # replace content in index.html
     replace_index_html(index_html, index_html_change_indicator_file, new_title, new_meta_description, canonical_url, new_noscript_content, favicon_base64, additional_html_head_content, page_icon_with_path)
+
+def get_random_element(elements):
+    return elements[random.randint(0, len(elements) - 1)]
+
+feedback_messages = [
+    "Hey, thanks a bunch for your help!",
+    "You rock! Thanks for your feedback.",
+    "You're the best; thanks for your help!",
+    "Much appreciated. Thanks!",
+    "You're a lifesaver; thank you!",
+    "I can't thank you enough for your support.",
+    "Big thanks for all your help!",
+    "I owe you one, thanks!",
+    "You're a \u2605; thanks for your help!",
+    "Thanks a million for your support!",
+    "Thanks for being such a great supporter!",
+    "Your help meant the world to me. Here's a hug-filled thank you!",
+    "Super grateful for your help.",
+    "Thanks a ton for your support!",
+    "Couldn't have done it without you. Thanks!",
+    "You're awesome; thanks for everything!",
+    "Thanks for being so supportive!",
+    "I really appreciate it; you're so kind!",
+    "Your help was right on time. Thanks!",
+    "I appreciate your help more than you'll ever know.",
+    "Kudos to you, and thanks a million!",
+    "Thank you for brightening my day!",
+    "You've been incredible! Thanks a ton.",
+    "Thank you. Let's go for a drink at the next opportunity!"
+]
+
+feedback_icons = [
+    "🙏",
+    "🤗",
+    "👍",
+    "👏",
+    "👌"
+]
+
+def get_sparql_query_examples():
+    try:
+        examples = []
+        qald_9_plus_train_dbpedia = requests.get("https://raw.githubusercontent.com/KGQA/QALD_9_plus/main/data/qald_9_plus_test_dbpedia.json").json()
+        qald_9_plus_train_wikidata = requests.get("https://raw.githubusercontent.com/KGQA/QALD_9_plus/main/data/qald_9_plus_test_wikidata.json").json()
+        
+        for question in qald_9_plus_train_dbpedia["questions"] + qald_9_plus_train_wikidata["questions"]:
+            if "query" in question and "sparql" in question["query"]:
+                examples.append((question["query"]["sparql"] + " \n").replace("\\n", "\n").replace(" PREFIX ", "\nPREFIX ").replace(" SELECT ", "\nSELECT ").replace(" sSELECT ", "\nSELECT ").replace(" WHERE ", "\nWHERE ").replace(" ORDER BY ", "\nORDER BY ").replace(" LIMIT ", "\nLIMIT ").replace(". ", ".\n").replace("; ", ";\n\t").replace(" } ", "\n}\n").replace(" { ", "\n{\n").replace("GROUP BY ", "\nGROUP BY ").replace(" UNION ", "\nUNION\n"))
+        
+        logging.info(f"Loaded {len(examples)} SPARQL query examples from QALD-9-plus.")
+        return examples
+    
+    except Exception as e: # fallback if the QALD-9-plus data could not be loaded
+        logging.error(f"Could not load QALD-9-plus train data: {e}")
+        return ["""PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
+PREFIX wd: <http://www.wikidata.org/entity/> 
+SELECT DISTINCT ?uri 
+WHERE {  
+    ?type wdt:P279* wd:Q4830453 . 
+    ?aerospace wdt:P279* wd:Q3477363 . 
+    ?healthcare wdt:P279* wd:Q15067276 . 
+    ?pharma wdt:P279* wd:Q507443 . 
+    ?uri wdt:P452 ?aerospace ; 
+         wdt:P452 ?healthcare . 
+} 
+""", 
+"""
+SELECT * WHERE { ?s ?p ?o } LIMIT 10
+"""] 

@@ -92,6 +92,10 @@ docker run --rm -p 8501:8501 --name loris --env-file=service_config/files/env lo
 
 Now, you can access the application at http://localhost:8501.
 
+== Cite
+
+To Be Done.
+
 == Contribute
 
 We are happy to receive your contributions. 
