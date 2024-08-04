@@ -75,7 +75,14 @@ After that, you can access the application at http://localhost:8501.
 
 The application is available at https://hub.docker.com/repository/docker/wseresearch/loris-llm-generated-representations-of-sparql-queries/general[Dockerhub] for free use in your environment.
 
-==== Build Docker Image
+==== Run Dockerhub Image
+
+[source, bash]
+----
+docker run --rm -p 8501:8501 --name loris --env-file=service_config/files/env wseresearch/loris-llm-generated-representations-of-sparql-queries
+----
+
+==== Build local Docker Image
 
 [source, bash]
 ----
@@ -83,7 +90,7 @@ docker build -t loris:latest .
 ----
 
 
-==== Run Docker Image
+==== Run local Docker Image
 
 [source, bash]
 ----
