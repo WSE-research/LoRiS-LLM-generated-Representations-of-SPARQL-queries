@@ -2,6 +2,6 @@ markdown==3.6
 Pillow==10.4.0
 python-decouple==3.8
 Requests==2.32.3
-streamlit==1.37.0
+streamlit==1.37.1
 streamlit_code_editor==0.1.21
 extra_streamlit_components==0.1.71
