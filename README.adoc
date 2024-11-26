@@ -35,13 +35,21 @@ toc::[]
 
 ---
 
-++++
-<div style="text-align: center">
-<img align="center" style="max-width:1442px" title="Screenshot" src="https://github.com/WSE-research/LLM-based-explanations-for-SPARQL-queries/blob/main/images/screenshot.png?raw=true"/><br>
-<sub><sup>Screenshot</sup></sub>
+//++++
 
-</div>
-++++
+//<div style="text-align: center">
+//<img align="center" style="max-width:1442px" title="Screenshot" src="https://github.com/WSE-research/LLM-based-explanations-for-SPARQL-queries/blob/main/images/screenshot.png?raw=true"/><br>
+//<sub><sup>Screenshot</sup></sub>
+
+//</div>
+
+//++++
+
+=== 👇 Click on the preview below to see the demo recording 👇
+
+ifdef::env-github[]
+image:https://img.youtube.com/vi/s499PeolbOg/maxresdefault.jpg[link=https://youtu.be/s499PeolbOg]
+endif::[]
 
 == Online Demo 
 
