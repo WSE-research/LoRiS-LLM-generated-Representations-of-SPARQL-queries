@@ -4,4 +4,4 @@ python-decouple==3.8
 Requests==2.32.5
 streamlit==1.52.2
 streamlit_code_editor==0.1.21
-extra_streamlit_components==0.1.71
+extra_streamlit_components==0.1.81
