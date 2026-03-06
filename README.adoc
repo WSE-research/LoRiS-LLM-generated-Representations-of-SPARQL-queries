@@ -109,7 +109,35 @@ Now, you can access the application at http://localhost:8501.
 
 == Cite
 
-To Be Done.
+Perevalov, A., Gashkov, A., Eltsova, M., Both, A. (2024). Understanding SPARQL Queries: Are We Already There? Multilingual Natural Language Generation Based on SPARQL Queries and Large Language Models. In: Demartini, G., et al. The Semantic Web – ISWC 2024. ISWC 2024. Lecture Notes in Computer Science, vol 15232. Springer, Cham. https://doi.org/10.1007/978-3-031-77850-6_10
+
+```bibtex
+@InProceedings{Perevalov2024:ISWC:understanding_SPARQL_queries,
+  title="Understanding {SPARQL} Queries: Are We Already There? Multilingual Natural Language Generation Based on {SPARQL} Queries and Large Language Models",
+  author="Aleksandr Perevalov
+  and Aleksandr Gashkov
+  and Maria Eltsova
+  and Andreas Both",
+  editor="Gianluca Demartini
+  and Katja Hose
+  and Maribel Acosta
+  and Matteo Palmonari
+  and Gong Cheng
+  and Hala Skaf-Molli
+  and Nicolas Ferranti
+  and Daniel Hern{\'a}ndez
+  and Aidan Hogan",
+  booktitle="The Semantic Web -- {ISWC} 2024",
+  year="2024",
+  publisher="Springer Nature Switzerland",
+  address="Cham",
+  pages="173--191",
+  keywords="SPARQL, natural language generation, large language models, multilingual, query verbalization, semantic web",
+  abstract="SPARQL is a standard query language for RDF data. Interpreting SPARQL queries might be a challenge, in particular, while being not familiar with the technical specifications of SPARQL or the meaning of the thing identified by a resource. In our study, we take an initial step toward employing Large Language Models to verbalize SPARQL queries, i.e., convert them to natural language. While other research often focused only on English verbalizations, we also implemented the transformation into German and Russian textual representations. The experimental framework leverages a combination of proprietary and open-source models, with enhancements achieved through further fine-tuning these models. Our methodology is assessed using the well-known question answering datasets QALD-9-plus and QALD-10, focusing on the aforementioned three languages: English, German, and Russian. To analyze performance quality, we employ metrics for machine translation alongside a survey for human evaluation. Although we encountered specific error types such as question over-specification, linguistic discrepancies, and semantic mismatches, the findings of our research indicate that Large Language Models are well-suited for the task of translating SPARQL queries into natural language, s.t., the semantics of SPARQL queries is represented in the mother tongue of the users.",
+  isbn="978-3-031-77850-6",
+  doi="10.1007/978-3-031-77850-6_10"
+}
+```
 
 == Contribute
 
