@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # parameters that might be provided at runtime by using the --env option
 ENV REPLACE_INDEX_HTML_CONTENT="false"
@@ -9,7 +9,13 @@ ENV BACKEND_URL=""
 
 # install dependencies
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -yq bash curl wget ca-certificates python3 python3-pip 
+RUN apt-get update && apt-get install -yq bash curl wget ca-certificates python3 python3-venv
+
+# Ubuntu 24.04 marks the system Python as externally managed (PEP 668), so the
+# application dependencies go into a virtual environment that is first on PATH
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # copy the application files
 COPY . /app
